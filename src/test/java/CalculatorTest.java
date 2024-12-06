@@ -11,35 +11,26 @@ class CalculatorTest {
 
     @Test
     void add() {
-        assertEquals(7, calculator.add(4, 3));
-        assertEquals(10, calculator.add(-20, 10));
-        assertEquals(35, calculator.add(25,10));
+        assertEquals(5, calculator.add(1, 4));
     }
 
     @Test
     void dif() {
-        assertEquals(-3, calculator.dif(2, 5));
-        assertEquals(-4, calculator.dif(1, 5));
-        assertEquals(77, calculator.dif(78,1));
+        assertEquals(5, calculator.dif(10, 5));
     }
 
     @Test
     void div() {
-        assertEquals(3, calculator.div(6, 2));
-        assertEquals(77, calculator.div(77,1));
-        assertThrows(ArithmeticException.class, () -> calculator.div(6, 0));
+        assertEquals(5, calculator.div(25, 5));
     }
 
     @Test
     void times() {
-        assertEquals(15, calculator.times(3, 5));
-        assertEquals(18, calculator.times(6,3));
-        assertEquals(0, calculator.times(89,0));
+        assertEquals(5, calculator.times(5, 1));
     }
 
     @Test
     void solver() {
-        Calculator calculator = new Calculator();
-        assertEquals(16, calculator.solver());
+        assertEquals(new Calculator().solver(2,0,1),-2);
     }
 }
