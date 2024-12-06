@@ -1,5 +1,4 @@
 public class Calculator {
-
     public int solver(int a, int b, int c) {
         int numberTimes = times(a, b);
         int numberDiv = div(c, a);
@@ -24,5 +23,4 @@ public class Calculator {
     public int times(int a, int b) {
         return a * b;
     }
-
 }
