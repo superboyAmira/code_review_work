@@ -6,7 +6,6 @@ on:
   pull_request:
     branches: [ "main" ]
   schedule: [cron: 30 12 * * 3, cron: 0 22 * * 5]
-    
 
 jobs:
   build-17-11:
@@ -25,15 +24,25 @@ jobs:
           java-version: ${{ matrix.version }}
           distribution: 'temurin'
 
-      - name: Add permition to gradlew
+      - name: Set permissions for Gradle (Linux/MacOS)
+        if: runner.os != 'Windows'
         run: chmod +x ./gradlew
 
       - name: Build with Gradle
-        uses: gradle/gradle-build-action@v2
-        with:
-          arguments: build
-      - name: Tests
-        run: ./gradlew test
+        run: |
+          if [[ "${{ matrix.os }}" == "Windows" ]]; then
+            gradlew.bat --no-daemon build
+          else
+            ./gradlew --no-daemon build
+          fi
+
+      - name: Run Tests
+        run: |
+          if [[ "${{ matrix.os }}" == "Windows" ]]; then
+            gradlew.bat --no-daemon test
+          else
+            ./gradlew --no-daemon test
+          fi
 
   build-13:
     strategy:
@@ -51,12 +60,22 @@ jobs:
           java-version: ${{ matrix.version }}
           distribution: 'temurin'
 
-      - name: Add permition to gradlew
+      - name: Set permissions for Gradle (Linux/MacOS)
+        if: runner.os != 'Windows'
         run: chmod +x ./gradlew
 
       - name: Build with Gradle
-        uses: gradle/gradle-build-action@v2
-        with:
-          arguments: build
-      - name: Tests
-        run: ./gradlew test
+        run: |
+          if [[ "${{ matrix.os }}" == "Windows" ]]; then
+            gradlew.bat --no-daemon build
+          else
+            ./gradlew --no-daemon build
+          fi
+
+      - name: Run Tests
+        run: |
+          if [[ "${{ matrix.os }}" == "Windows" ]]; then
+            gradlew.bat --no-daemon test
+          else
+            ./gradlew --no-daemon test
+          fi
